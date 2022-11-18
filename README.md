@@ -15,3 +15,8 @@ py app.py
 ```
 
 El cual estará hosteado por defecto en **localhost** (http://127.0.0.1:5000)
+
+</br></br>
+
+![Alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Wikidata_Stamp_Rec_Dark.svg/200px-Wikidata_Stamp_Rec_Dark.svg.png "Powered by Wikidata")
+
