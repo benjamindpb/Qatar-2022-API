@@ -70,7 +70,7 @@ def stadiums():
         }
     return R
 
-@app.route('/qatar2022/group/<g>')
+@app.route('/qatar2022/group/info/<g>')
 def groups_info(g: str):
     if g not in GROUPS_CONSTANT:
         return {
@@ -99,7 +99,7 @@ def groups_info(g: str):
         'members': D
     }
 
-@app.route('/qatar2022/group/<g>/results')
+@app.route('/qatar2022/group/results/<g>/')
 def groups_results(g: str):
     if g not in GROUPS_CONSTANT:
         return {
