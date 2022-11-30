@@ -1,5 +1,6 @@
 # Proyecto-Watos
-Proyecto del ramo La Web de Datos CC7220-1 Primavera 2022
+Proyecto del ramo La Web de Datos CC7220-1 Primavera 2022.
+Este proyecto tiene por objetivo implementar una API para obtener información sobre el mundial de fútbol de la FIFA de Qatar 2022 usando el *endpoint* del servicio de consultas de Wikidata (WDQS).
 
 ## Dependencias
 Para este proyecto se necesita contar con los siguientes paquetes: **flask** y **requests**. Para obtenerlos basta con ejecutar el siguiente comando en la consola:
@@ -15,8 +16,3 @@ py app.py
 ```
 
 El cual estará hosteado por defecto en **localhost** (http://127.0.0.1:5000)
-
-</br></br>
-
-![Alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Wikidata_Stamp_Rec_Dark.svg/200px-Wikidata_Stamp_Rec_Dark.svg.png "Powered by Wikidata")
-
