@@ -11,15 +11,15 @@ Para este proyecto se necesita contar con los siguientes paquetes: **flask** y *
 pip install -r requierements.txt
 ```
 ## Ejecución de API
-Para ejecutar el *backend* del proyecto se debe ejecutar el siguiente comando en la consola:
+Para correr la API se debe ejecutar el siguiente comando en la consola:
 
 ```console
 py app.py
 ```
 
-El cual estará hosteado por defecto en **localhost** (http://127.0.0.1:5000)
+Este comando hosteará la API por defecto en **localhost:5000** (http://127.0.0.1:5000)
 
-## Usos
+## Usos (API *calls*)
 La API cuenta con los siguientes casos de uso para obtener distinta información:
 
 - Participantes:
@@ -46,4 +46,4 @@ La API cuenta con los siguientes casos de uso para obtener distinta información
 
 ---
 
-![Alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Wikidata_Stamp_Rec_Dark.svg/200px-Wikidata_Stamp_Rec_Dark.svg.png "Powered by Wikidata")
+[![Alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Wikidata_Stamp_Rec_Dark.svg/200px-Wikidata_Stamp_Rec_Dark.svg.png "Powered by Wikidata")](https://www.wikidata.org/wiki/Wikidata:Main_Page)
