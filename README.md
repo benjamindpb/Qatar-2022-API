@@ -1,4 +1,5 @@
-# Qatar 2022 FIFA World Cup API
+![alt](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_de_la_Copa_Mundial_de_f%C3%BAtbol_2022.svg/320px-Logo_de_la_Copa_Mundial_de_f%C3%BAtbol_2022.svg.png)
+# Qatar 2022 API
 Proyecto del ramo La Web de Datos CC7220-1 Primavera 2022.
 
 Este proyecto tiene por objetivo implementar una API para obtener información sobre el mundial de fútbol de la FIFA de Qatar 2022 usando el *endpoint* del servicio de consultas de Wikidata ([WDQS](https://query.wikidata.org/)).
