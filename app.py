@@ -99,7 +99,7 @@ def groups_info(g: str):
         'members': D
     }
 
-@app.route('/qatar2022/group/results/<g>/')
+@app.route('/qatar2022/group/results/<g>')
 def groups_results(g: str):
     if g not in GROUPS_CONSTANT:
         return {
