@@ -157,12 +157,14 @@ def stadiums():
     for stadium in R:
         html+=f"""
             <h2>Estadio:{R[stadium]["label"]}</h2>
-            <p>Uri: {R[stadium]["uri"]}</p>
-            <p>opening: {R[stadium]["opening"]}</p>
-            <p>occupant: {R[stadium]["occupant"]}</p>
-            <p>capacity: {R[stadium]["capacity"]}</p>
-            <p>coords: {R[stadium]["coords"]}</p>
-            <p>image: {R[stadium]["image"]}</p>
+            <ul>
+                <li>Uri: {R[stadium]["uri"]}</li>
+                <li>opening: {R[stadium]["opening"]}</li>
+                <li>occupant: {R[stadium]["occupant"]}</li>
+                <li>capacity: {R[stadium]["capacity"]}</li>
+                <li>coords: {R[stadium]["coords"]}</li>
+                <li>image: {R[stadium]["image"]}</li>
+            </ul>
         """
         if R[stadium]["image"] != "undefined":
             html += f"""
@@ -200,10 +202,56 @@ def groups_info(g: str):
             'flag': r['flag']['value'],
             'uri': r['team']['value']
         }
-    return {
-        'group': g,
-        'members': D
-    }
+    html ="""
+        <html>
+            <head>
+                <style>
+                body {
+                background-color: #A68A5C;
+                color: white;
+                }
+                .header {
+                    color:white;
+                    text-align: center;
+                    background: #C62347;
+                }
+                .groups{
+                    color:white;
+                    background: #DCC090;
+                }
+                </style>
+            </head>
+            <body>
+                
+        """
+    
+    html+=f"""
+        <div class="header">
+            <h1>Grupo {g}</h1>
+        </div>
+        <div class="groups">
+    """
+    for t in D:
+        html+=f"""
+        <h3>{t}</h3>
+            <ul>
+                <li>captain:{D[t]["captain"]}</li>
+                <li>coach:{D[t]["coach"]}</li>
+                <li>flag:{D[t]["flag"]}</li>
+                <li>uri:{D[t]["uri"]}</li> 
+            </ul>
+        """
+        if D[t]["flag"] != "undefined":
+            html += f"""
+            <img src="{D[t]["flag"]}" width="200" height="200">
+            """
+    html+="""
+            </div>
+            <a href=" http://localhost:5000">Volver al inicio</a>
+            </body>
+        </html>
+    """
+    return html
 
 @app.route('/qatar2022/group/results/<g>/')
 def groups_results(g: str):
@@ -245,9 +293,56 @@ def groups():
     for gl in GROUPS_CONSTANT:
         d = groups_info(gl)
         L.append(d)
-    return {
-        'groups': L
-    }
+    html ="""
+        <html>
+            <head>
+                <style>
+                body {
+                background-color: #A68A5C;
+                color: white;
+                }
+                .header {
+                    color:white;
+                    text-align: center;
+                    background: #C62347;
+                }
+                .groups{
+                    color:white;
+                    background: #DCC090;
+                }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>Grupos</h1>
+                </div>
+                <div class="groups">
+        """
+    for g in L:
+        html+=f"""
+            <h2>Grupo {g["group"]}</h2>
+        """
+        for t in g["members"]:
+            html+=f"""
+            <h3>{t}</h3>
+                <ul>
+                    <li>captain:{g["members"][t]["captain"]}</li>
+                    <li>coach:{g["members"][t]["coach"]}</li>
+                    <li>flag:{g["members"][t]["flag"]}</li>
+                    <li>uri:{g["members"][t]["uri"]}</li> 
+                </ul>
+            """
+            if g["members"][t]["flag"] != "undefined":
+                html += f"""
+                <img src="{g["members"][t]["flag"]}" width="200" height="200">
+                """
+    html+="""
+            </div>
+            <a href=" http://localhost:5000">Volver al inicio</a>
+            </body>
+        </html>
+    """
+    return html
 
 @app.route('/qatar2022/participants')
 def participants():
