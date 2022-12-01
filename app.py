@@ -319,23 +319,7 @@ def groups():
                 <div class="groups">
         """
     for g in L:
-        html+=f"""
-            <h2>Grupo {g["group"]}</h2>
-        """
-        for t in g["members"]:
-            html+=f"""
-            <h3>{t}</h3>
-                <ul>
-                    <li>captain:{g["members"][t]["captain"]}</li>
-                    <li>coach:{g["members"][t]["coach"]}</li>
-                    <li>flag:{g["members"][t]["flag"]}</li>
-                    <li>uri:{g["members"][t]["uri"]}</li> 
-                </ul>
-            """
-            if g["members"][t]["flag"] != "undefined":
-                html += f"""
-                <img src="{g["members"][t]["flag"]}" width="200" height="200">
-                """
+        html+=f"""<p>{g}</p>"""
     html+="""
             </div>
             <a href=" http://localhost:5000">Volver al inicio</a>
