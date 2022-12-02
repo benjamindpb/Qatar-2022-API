@@ -9,7 +9,68 @@ WD_API_ENNPOINT = 'https://www.wikidata.org/w/api.php'
 
 @app.route('/')
 def hello_world():
-    return "Hello World"
+    return """
+            <html>
+            <head>
+            <style>
+                body {
+                background-color: #A68A5C;
+                }
+                .header {
+                    color:white;
+                    text-align: center;
+                    background: #C62347;
+                }
+                .consults{
+                    color:white;
+                    background: #DCC090;
+                }
+                .consults ul li {
+                    color:white;
+                    margin: 5px;
+                }
+            </style>
+            </head>
+            <body>
+            <div class="header">
+                <h1>Qatar 2022 API</h1>
+                Este proyecto tiene por objetivo implementar una API para obtener 
+                información sobre el mundial de fútbol de la FIFA de Qatar 2022
+                usando el endpoint del servicio de consultas de Wikidata
+            </div>
+            <div class="consults">
+                <h2>Consultas:</h2>
+                <ul>
+                    <li><a href=" http://localhost:5000/qatar2022/participants">Participantes</a></li>
+                    <li><a href=" http://localhost:5000/qatar2022/stadiums">Estadios</a></li>
+                    <li><a href=" http://localhost:5000/qatar2022/groups">Grupos(tarda un poco)</a></li>
+                    <li>
+                        Informacion de Grupos:
+                        <a href=" http://localhost:5000/qatar2022/group/info/A">A</a>
+                        <a href=" http://localhost:5000/qatar2022/group/info/B">B</a>
+                        <a href=" http://localhost:5000/qatar2022/group/info/C">C</a>
+                        <a href=" http://localhost:5000/qatar2022/group/info/D">D</a>
+                        <a href=" http://localhost:5000/qatar2022/group/info/E">E</a>
+                        <a href=" http://localhost:5000/qatar2022/group/info/F">F</a>
+                        <a href=" http://localhost:5000/qatar2022/group/info/G">G</a>
+                        <a href=" http://localhost:5000/qatar2022/group/info/H">H</a>
+                    </li>
+                    <li>
+                        Resultados de Grupo:
+                        <a href=" http://localhost:5000/qatar2022/group/results/A">A</a>
+                        <a href=" http://localhost:5000/qatar2022/group/results/B">B</a>
+                        <a href=" http://localhost:5000/qatar2022/group/results/C">C</a>
+                        <a href=" http://localhost:5000/qatar2022/group/results/D">D</a>
+                        <a href=" http://localhost:5000/qatar2022/group/results/E">E</a>
+                        <a href=" http://localhost:5000/qatar2022/group/results/F">F</a>
+                        <a href=" http://localhost:5000/qatar2022/group/results/G">G</a>
+                        <a href=" http://localhost:5000/qatar2022/group/results/H">H</a>
+                    </li>
+                </ul>
+            </div>
+            </html>
+            </body>
+            """
 
 @app.route('/id/<search>')
 def get_uid(search): # función auxiliar
@@ -68,7 +129,54 @@ def stadiums():
             'capacity': r['cap']['value'],
             'coords': r['coords']['value'],
         }
-    return R
+    html ="""
+        <html>
+            <head>
+                <style>
+                body {
+                background-color: #A68A5C;
+                color: white;
+                }
+                .header {
+                    color:white;
+                    text-align: center;
+                    background: #C62347;
+                }
+                .stadium{
+                    color:white;
+                    background: #DCC090;
+                }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>Estadios</h1>
+                </div>
+                <div class="stadium">
+        """
+    for stadium in R:
+        html+=f"""
+            <h2>Estadio:{R[stadium]["label"]}</h2>
+            <ul>
+                <li>Uri: {R[stadium]["uri"]}</li>
+                <li>opening: {R[stadium]["opening"]}</li>
+                <li>occupant: {R[stadium]["occupant"]}</li>
+                <li>capacity: {R[stadium]["capacity"]}</li>
+                <li>coords: {R[stadium]["coords"]}</li>
+                <li>image: {R[stadium]["image"]}</li>
+            </ul>
+        """
+        if R[stadium]["image"] != "undefined":
+            html += f"""
+            <img src="{R[stadium]["image"]}" width="200" height="200">
+            """
+    html+="""
+            </div>
+            <a href=" http://localhost:5000">Volver al inicio</a>
+            </body>
+        </html>
+    """
+    return html
 
 @app.route('/qatar2022/group/info/<g>')
 def groups_info(g: str):
@@ -94,10 +202,56 @@ def groups_info(g: str):
             'flag': r['flag']['value'],
             'uri': r['team']['value']
         }
-    return {
-        'group': g,
-        'members': D
-    }
+    html ="""
+        <html>
+            <head>
+                <style>
+                body {
+                background-color: #A68A5C;
+                color: white;
+                }
+                .header {
+                    color:white;
+                    text-align: center;
+                    background: #C62347;
+                }
+                .groups{
+                    color:white;
+                    background: #DCC090;
+                }
+                </style>
+            </head>
+            <body>
+                
+        """
+    
+    html+=f"""
+        <div class="header">
+            <h1>Grupo {g}</h1>
+        </div>
+        <div class="groups">
+    """
+    for t in D:
+        html+=f"""
+        <h3>{t}</h3>
+            <ul>
+                <li>captain:{D[t]["captain"]}</li>
+                <li>coach:{D[t]["coach"]}</li>
+                <li>flag:{D[t]["flag"]}</li>
+                <li>uri:{D[t]["uri"]}</li> 
+            </ul>
+        """
+        if D[t]["flag"] != "undefined":
+            html += f"""
+            <img src="{D[t]["flag"]}" width="200" height="200">
+            """
+    html+="""
+            </div>
+            <a href=" http://localhost:5000">Volver al inicio</a>
+            </body>
+        </html>
+    """
+    return html
 
 @app.route('/qatar2022/group/results/<g>')
 def groups_results(g: str):
@@ -139,9 +293,40 @@ def groups():
     for gl in GROUPS_CONSTANT:
         d = groups_info(gl)
         L.append(d)
-    return {
-        'groups': L
-    }
+    html ="""
+        <html>
+            <head>
+                <style>
+                body {
+                background-color: #A68A5C;
+                color: white;
+                }
+                .header {
+                    color:white;
+                    text-align: center;
+                    background: #C62347;
+                }
+                .groups{
+                    color:white;
+                    background: #DCC090;
+                }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>Grupos</h1>
+                </div>
+                <div class="groups">
+        """
+    for g in L:
+        html+=f"""<p>{g}</p>"""
+    html+="""
+            </div>
+            <a href=" http://localhost:5000">Volver al inicio</a>
+            </body>
+        </html>
+    """
+    return html
 
 @app.route('/qatar2022/participants')
 def participants():
@@ -159,11 +344,51 @@ def participants():
         team_label = r['teamLabel']['value'].split(' at ')[0]
         print(team_label)
         L.append(team_label)
-    return {
-        'participants': L,
-        'numberOfParticipants': 32,
-        'missing': 32-len(L)
-    }
+    html = """
+        <html>
+            <head>
+                <style>
+                body {
+                background-color: #A68A5C;
+                color: white;
+                }
+                .header {
+                    color:white;
+                    text-align: center;
+                    background: #C62347;
+                }
+                .participants-list{
+                    color:white;
+                    background: #DCC090;
+                }
+                .participants-list ul li {
+                    color:white;
+                    margin: 5px;
+                }
+                </style>
+            </head>
+        """
+    html +=f"""   
+            <body>
+            <div class="header">
+                <h1>Participantes</h1>
+                <h2>Numero de participantes: 32</h2>
+                <h2>missing: {32-len(L)} </h2>
+            </div>
+            <div class="participants-list">
+                <h2>Lista de participantes:</h2>
+                <ul>
+        """
+    for team in L:
+        html += f"<li>{team}</li>"    
+    html +=   """
+            </ul>
+        </div>
+        <a href=" http://localhost:5000">Volver al inicio</a>
+        </body>
+        </html>
+        """
+    return html
 
 if __name__ == '__main__':
     app.run(debug=True)
