@@ -1,4 +1,5 @@
-![alt](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_de_la_Copa_Mundial_de_f%C3%BAtbol_2022.svg/320px-Logo_de_la_Copa_Mundial_de_f%C3%BAtbol_2022.svg.png)
+![2022_FIFA_World_Cup_Qatar_(Wordmark) svg](https://user-images.githubusercontent.com/48598318/216691080-5b85772b-eccb-4e30-a683-7a492ffe336d.png)
+
 # Qatar 2022 API
 Proyecto del ramo La Web de Datos CC7220-1 Primavera 2022.
 
